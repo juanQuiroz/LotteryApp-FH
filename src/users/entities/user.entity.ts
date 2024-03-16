@@ -1,8 +1,11 @@
+import { Lottery } from 'src/lottery/entities/lottery.entity';
+import { Ticket } from 'src/lottery/entities/tickets.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -18,10 +21,21 @@ export class User {
   email: string;
 
   @Column('text', { select: false, nullable: true })
-  password: string;
+  password?: string;
 
   @Column('text', { nullable: true })
-  discordId: string;
+  discordId?: string;
+
+  @Column('bool', { default: true })
+  isActive: boolean;
+
+  // Relación con las loterías creadas por el usuario
+  @OneToMany(() => Lottery, (lottery) => lottery.creator)
+  createdLotteries: Lottery[];
+
+  // Relación con los tickets asociados al usuario
+  @OneToMany(() => Ticket, (ticket) => ticket.user)
+  tickets: Ticket[];
 
   @BeforeInsert()
   checkFieldsBeforeInsert() {

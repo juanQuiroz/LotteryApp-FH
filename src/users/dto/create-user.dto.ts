@@ -13,8 +13,8 @@ export class CreateUserDto {
     message:
       'The password must have a uppercase, lowercase letter and a number',
   })
-  password?: string;
+  password: string;
 
   @IsString()
-  discordId?: string;
+  discordId: string;
 }
