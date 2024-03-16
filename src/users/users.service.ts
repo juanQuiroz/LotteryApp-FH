@@ -34,6 +34,7 @@ export class UsersService {
         ...newUser,
       };
     } catch (error) {
+      console.log(error);
       this.handleDBErrors(error);
     }
   }
