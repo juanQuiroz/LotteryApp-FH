@@ -33,21 +33,49 @@ export class UsersController {
   }
 
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'List all users',
+    type: User,
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   findAll(@Query() paginationDto: PaginationDto) {
     return this.usersService.findAll(paginationDto);
   }
 
   @Get(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'List one user by id',
+    type: User,
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
   @Patch(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'update one user by id',
+    type: User,
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'Delete one user by id',
+    type: User,
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 403, description: 'Forbidden, token related' })
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

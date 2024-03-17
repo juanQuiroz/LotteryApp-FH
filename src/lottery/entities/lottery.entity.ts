@@ -30,7 +30,7 @@ export class Lottery {
   })
   winners: string[];
 
-  @Column('text')
+  @Column('text', { nullable: true })
   imageUrl: string;
 
   // Relación con el usuario creador

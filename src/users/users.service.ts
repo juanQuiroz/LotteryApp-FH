@@ -76,7 +76,7 @@ export class UsersService {
     const user = await this.userRepository.findOneBy({ id });
     await this.userRepository.remove(user);
 
-    return { status: 'ok', message: `User with id ${id} deleted successfully` };
+    return { message: `User with id ${id} deleted successfully` };
   }
 
   private handleDBErrors(error: any): never {

@@ -6,11 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  HttpCode,
+  Query,
 } from '@nestjs/common';
 import { LotteryService } from './lottery.service';
 import { CreateLotteryDto } from './dto/create-lottery.dto';
 import { UpdateLotteryDto } from './dto/update-lottery.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { PaginationDto } from 'src/common/dtos/pagination.dto';
 
 @ApiTags('Lottery')
 @Controller('lottery')
@@ -18,27 +21,29 @@ export class LotteryController {
   constructor(private readonly lotteryService: LotteryService) {}
 
   @Post()
+  @HttpCode(201)
   create(@Body() createLotteryDto: CreateLotteryDto) {
     return this.lotteryService.create(createLotteryDto);
   }
 
   @Get()
-  findAll() {
-    return this.lotteryService.findAll();
+  @HttpCode(201)
+  findAll(@Query() paginationDto: PaginationDto) {
+    return this.lotteryService.findAll(paginationDto);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.lotteryService.findOne(+id);
+    return this.lotteryService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLotteryDto: UpdateLotteryDto) {
-    return this.lotteryService.update(+id, updateLotteryDto);
+    return this.lotteryService.update(id, updateLotteryDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.lotteryService.remove(+id);
+    return this.lotteryService.remove(id);
   }
 }
