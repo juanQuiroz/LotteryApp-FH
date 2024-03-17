@@ -1,13 +1,17 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsString, Matches } from 'class-validator';
 
 export class CreateUserDto {
+  @ApiProperty()
   @IsString()
   fullname: string;
 
+  @ApiProperty()
   @IsString()
   @IsEmail()
   email: string;
 
+  @ApiProperty()
   @IsString()
   @Matches(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message:
@@ -15,6 +19,7 @@ export class CreateUserDto {
   })
   password: string;
 
+  @ApiProperty()
   @IsString()
   discordId: string;
 }

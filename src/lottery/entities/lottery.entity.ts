@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Ticket } from './tickets.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Lottery {
@@ -21,6 +22,13 @@ export class Lottery {
 
   @Column({ type: 'date' })
   date: Date;
+
+  @ApiProperty()
+  @Column('text', {
+    array: true,
+    default: [],
+  })
+  winners: string[];
 
   @Column('text')
   imageUrl: string;

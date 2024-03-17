@@ -15,8 +15,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Teslo REST API')
-    .setDescription("Fernando Herrera's nestjs course")
+    .setTitle('LotteryApp API')
+    .setDescription("Fernando Herrera's Hackathon")
     .setVersion('1.0')
     // .addTag('cats')
     .build();

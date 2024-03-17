@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { LotteryService } from './lottery.service';
 import { CreateLotteryDto } from './dto/create-lottery.dto';
 import { UpdateLotteryDto } from './dto/update-lottery.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Lottery')
 @Controller('lottery')
 export class LotteryController {
   constructor(private readonly lotteryService: LotteryService) {}

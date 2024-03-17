@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Lottery } from 'src/lottery/entities/lottery.entity';
 import { Ticket } from 'src/lottery/entities/tickets.entity';
 import {
@@ -11,6 +12,11 @@ import {
 
 @Entity('users')
 export class User {
+  @ApiProperty({
+    example: '6748dc4f-ac91-4bc0-8916-5c3e4acff8c6',
+    description: 'User Id',
+    uniqueItems: true,
+  })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
