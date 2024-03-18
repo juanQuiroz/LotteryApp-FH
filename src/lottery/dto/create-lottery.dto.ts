@@ -10,7 +10,7 @@ export class CreateLotteryDto {
   @IsString()
   details: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: '2024-07-28T18:30:00' })
   @IsDateString()
   date: string;
 

@@ -123,6 +123,44 @@ export class LotteryService {
     return this.ticketRepository.save(ticket);
   }
 
+  //* darwLottery
+  async darwLottery(lotteryId: string) {
+    const lottery = await this.lotteryRepository.findOne({
+      where: {
+        id: lotteryId,
+      },
+      relations: ['tickets'],
+    });
+
+    if (!lottery) {
+      throw new Error(`Lottery with id ${lotteryId} not found`);
+    }
+
+    const tickets = lottery.tickets;
+    if (tickets.length === 0) {
+      throw new Error(`No tickets found for lottery ${lotteryId}`);
+    }
+
+    // Escoge un ticket aleatorio como ganador
+    const ganador = tickets[Math.floor(Math.random() * tickets.length)];
+
+    // Obtener los datos del ganador
+    const ganadorData = await this.ticketRepository.findOne({
+      where: { id: ganador.id },
+      relations: ['user'],
+    });
+
+    // Actualizar el campo winners en la entidad Lottery
+    lottery.winners = [`${ganador.id}`];
+    await this.lotteryRepository.save(lottery);
+
+    // Devolver los datos del ganador
+    return {
+      ganador: ganadorData,
+      message: `El ganador del sorteo es el ticket ${ganador.id}`,
+    };
+  }
+
   private handleDBErrors(error: any): never {
     if (error.code == '23505') {
       throw new BadRequestException(error.detail);

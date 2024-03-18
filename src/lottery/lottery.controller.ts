@@ -56,4 +56,10 @@ export class LotteryController {
   async createTicket(@Body() createTicketDto: CreateTicketDto) {
     return this.lotteryService.createTicket(createTicketDto);
   }
+
+  @Post(':id/draw-lottery')
+  @HttpCode(200)
+  async realizarSorteo(@Param('id') lotteryId: string) {
+    return this.lotteryService.darwLottery(lotteryId);
+  }
 }
