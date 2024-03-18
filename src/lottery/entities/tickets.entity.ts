@@ -6,7 +6,7 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 export class Ticket {
   @ApiProperty()
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @ManyToOne(() => User, (user) => user.tickets)

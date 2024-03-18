@@ -51,7 +51,12 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    const user = await this.userRepository.findOneBy({ id });
+    const user = await this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['tickets', 'tickets.lottery'],
+    });
     if (!user) {
       return `User with id ${id} not found`;
     }
